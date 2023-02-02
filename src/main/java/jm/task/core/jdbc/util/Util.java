@@ -17,15 +17,13 @@ public class Util {
     private Util() {
 
     }
+
     public static Connection getConnection() {
-        Connection localCon = con;
-        if (localCon == null) {
+        if (con == null) {
             synchronized (Util.class) {
-                localCon = con;
-                if (localCon == null) {
+                if (con == null) {
                     try {
-                        localCon = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                        con = localCon;
+                        con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
                         System.out.println("Соединение создано");
                     } catch (SQLException e) {
                         System.out.println("Ошибка соединения");
@@ -36,6 +34,6 @@ public class Util {
             }
         }
 
-        return localCon;
+        return con;
     }
 }
